@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: ghcr.io/Endrius-Albert/bookcatalog
   pullPolicy: IfNotPresent
-  tag: "latest"
+  tag: "latest" 
 
 imagePullSecrets: []
 
@@ -63,3 +63,12 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+
+environmentVariables:
+  - name: DJANGO_DEBUG
+    value: "false"
+  - name: DJANGO_ALLOWED_HOSTS
+    value: "*"
+
+loadSecretsFrom: bookcatalog-db
