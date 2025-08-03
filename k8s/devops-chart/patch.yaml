@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: argocd-initial-admin-secret
+  namespace: argocd
+stringData:
+  password: Aa36513411.
