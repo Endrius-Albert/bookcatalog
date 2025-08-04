@@ -4,12 +4,14 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from .models import Book
 from .serializers import BookSerializer
+from django.shortcuts import get_object_or_404
 
 @api_view(['GET'])
 def health_view(request):
     return Response({"status": "ok"})
 
 class BookView(APIView):
+
     def get(self, request):
         books = Book.objects.all()
         serializer = BookSerializer(books, many=True)
@@ -22,3 +24,17 @@ class BookView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def put(self, request):
+        isbn = request.data.get("isbn")
+        book = get_object_or_404(Book, isbn=isbn)
+        serializer = BookSerializer(book, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request):
+        isbn = request.data.get("isbn")
+        book = get_object_or_404(Book, isbn=isbn)
+        book.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
