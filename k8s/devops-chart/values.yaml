@@ -3,7 +3,7 @@ replicaCount: 3
 image:
   repository: ghcr.io/Endrius-Albert/bookcatalog
   pullPolicy: IfNotPresent
-  tag: "latest" 
+  tag: "latest"
 
 imagePullSecrets: []
 
@@ -24,30 +24,30 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8000
 
 ingress:
-  enabled: false
-  className: ""
+  enabled: true
+  className: nginx
   annotations: {}
   hosts:
-    - host: chart-example.local
+    - host: bookcatalog.local
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
   tls: []
 
 resources: {}
 
 livenessProbe:
   httpGet:
-    path: /
-    port: http
+    path: /api/health
+    port: 8000
 
 readinessProbe:
   httpGet:
-    path: /
-    port: http
+    path: /api/health
+    port: 8000
 
 autoscaling:
   enabled: false
@@ -55,15 +55,20 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
 
-volumes: []
-volumeMounts: []
+volumes:
+  - name: config-volume
+    configMap:
+      name: app-config
+
+volumeMounts:
+  - name: config-volume
+    mountPath: /app/config
 
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
-
 
 environmentVariables:
   - name: DJANGO_DEBUG

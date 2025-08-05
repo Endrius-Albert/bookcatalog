@@ -10,11 +10,12 @@ services:
       DATABASE_USER: "books"
       DATABASE_PASSWORD: "books"
       DATABASE_HOST: "db"
+      DATABASE_PORT: "5432"
       DEVELOPMENT_MODE: "true"
     depends_on:
       - db
     volumes:
-      - ./:/app/  
+      - ./bookcatalog:/app/bookcatalog
 
   db:
     image: postgres:17.5

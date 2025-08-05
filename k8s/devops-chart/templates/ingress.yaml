@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "devops-chart.fullname" . }}-ingress
+  labels:
+    {{- include "devops-chart.labels" . | nindent 4 }}
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: {{ .Values.ingress.hosts[0].host }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "devops-chart.fullname" . }}
+                port:
+                  number: {{ .Values.service.port }}
