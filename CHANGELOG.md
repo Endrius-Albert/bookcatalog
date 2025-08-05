@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/Endrius-Albert/bookcatalog/compare/v1.1.0...v1.1.1) (2025-08-05)
+
+### Bug Fixes
+
+* **ci:** run migrations before tests ([1052b90](https://github.com/Endrius-Albert/bookcatalog/commit/1052b90d6566e952757cbe1ccc15040601111a26))
+* **ci:** run migrations before tests ([cf8b4cb](https://github.com/Endrius-Albert/bookcatalog/commit/cf8b4cb5c199bdb6f0832735346a61ca9fa83375))
+
 ## [1.1.0](https://github.com/Endrius-Albert/bookcatalog/compare/v1.0.0...v1.1.0) (2025-08-05)
 
 ### Features
