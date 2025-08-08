@@ -8,7 +8,7 @@
 
 ## 1. Introduction
 
-This project is a professional Django REST API for managing a book catalog. It demonstrates DevOps practices including containerization, continuous integration, automated deployment, infrastructure as code, and GitOps using Kubernetes.
+This project aims to practically implement the full DevOps cycle, from development to continuous deployment in a Kubernetes environment. The application, called Book Catalog, is a REST API developed with Django, automatically tested, containerized with Docker, integrated into CI/CD pipelines with GitHub Actions, and deployed on Kubernetes with Helm, following modern infrastructure-as-code and GitOps practices via ArgoCD.
 
 ---
 
@@ -178,15 +178,20 @@ targetRevision: main
 path: k8s/devops-chart
 
 ## 10. ScreenShots
-
+API running in browser
 ![API running in browser](images/API_running_in_browser.png)
+
+GitHub Actions workflow
 ![GitHub Actions workflow](images/github_actions_workflow.png)
+
+Helm Install
 ![Helm Install](images/helm_install.png)
+
+ArgoCD interface
 ![ArgoCD interface](images/argocd_interface.png)
 
 ## 11. Final Notes
 
-This project showcases a complete DevOps pipeline, from development to deployment and monitoring using modern tooling. It follows best practices in automation, testing, infrastructure, and application delivery.
-
+The application is structured to be automatically tested, packaged in a Docker image, published to a remote repository, deployed with Helm, and managed via GitOps. This workflow reflects not only the technical functioning of a modern system, but also the lessons learned throughout this process.
 
 
