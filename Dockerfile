@@ -12,8 +12,6 @@ RUN apt-get update && \
 COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh && dos2unix /app/entrypoint.sh || true
 
-COPY bookcatalog ./bookcatalog
-COPY api ./api
-COPY manage.py .
+COPY . .
 
 ENTRYPOINT ["/app/entrypoint.sh"]

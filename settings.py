@@ -6,7 +6,9 @@ env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEBUG = env.bool("DEVELOPMENT_MODE", True)
+dev_mode_str = env.str("DEVELOPMENT_MODE", "true").lower()
+DEBUG = dev_mode_str in ("true", "1", "yes")
+
 SECRET_KEY = env.str("SECRET_KEY", "django-insecure-your-fallback-key")
 ALLOWED_HOSTS = ['*']
 
@@ -51,24 +53,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bookcatalog.wsgi.application'
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': env.str("DATABASE_NAME"),
-            'USER': env.str("DATABASE_USER"),
-            'PASSWORD': env.str("DATABASE_PASSWORD"),
-            'HOST': env.str("DATABASE_HOST"),
-            'PORT': '5432',
-        }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env.str("DATABASE_NAME"),
+        "USER": env.str("DATABASE_USER"),
+        "PASSWORD": env.str("DATABASE_PASSWORD"),
+        "HOST": env.str("DATABASE_HOST"),
+        "PORT": env.str("DATABASE_PORT"),
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
+
+print("DEBUG =", DEBUG)
+print("DATABASES =", DATABASES)
 
 AUTH_PASSWORD_VALIDATORS = [
     {

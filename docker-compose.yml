@@ -5,17 +5,15 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "8000:8000"
-    environment:
-      DATABASE_NAME: "books_db"
-      DATABASE_USER: "books"
-      DATABASE_PASSWORD: "books"
-      DATABASE_HOST: "db"
-      DATABASE_PORT: "5432"
-      DEVELOPMENT_MODE: "true"
+    env_file:
+      - .env
     depends_on:
       - db
     volumes:
       - ./bookcatalog:/app/bookcatalog
+      - ./api:/app/api
+      - ./manage.py:/app/manage.py
+      - ./.env:/app/.env
 
   db:
     image: postgres:17.5
@@ -25,6 +23,7 @@ services:
       POSTGRES_PASSWORD: "books"
     volumes:
       - pg_data:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d/
 
 volumes:
   pg_data:
